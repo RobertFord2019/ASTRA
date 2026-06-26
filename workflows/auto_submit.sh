@@ -2,9 +2,10 @@
 #===============================================================================
 # Script Name: auto_submit.sh
 # Purpose:
-#   This script automates the submission of DFT jobs across multiple
-#   calculation directories. It checks the status of each job by examining
-#   the CONTCAR and OUTCAR files, and decides whether to resubmit or not.
+#   This script automates the submission of structural relaxation calculation
+#   jobs across multiple calculation directories. It checks the status of each
+#   job by examining the CONTCAR and OUTCAR files, and decides whether to
+#   resubmit or not.
 #
 #   For each directory:
 #     1. If CONTCAR is missing or empty -> submit the job.
