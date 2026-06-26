@@ -1,8 +1,8 @@
 #!/bin/bash
 #===============================================================================
-# Script Name: vasp_auto_submit.sh
+# Script Name: auto_submit.sh
 # Purpose:
-#   This script automates the submission of VASP jobs across multiple
+#   This script automates the submission of DFT jobs across multiple
 #   calculation directories. It checks the status of each job by examining
 #   the CONTCAR and OUTCAR files, and decides whether to resubmit or not.
 #
@@ -22,7 +22,7 @@
 # Usage:
 #   Modify the configurable variables below (DIR_PATTERN, SUCCESS_STRING,
 #   SUBMIT_CMD, REPORT_FILE) to suit your needs, then execute:
-#       ./vasp_auto_submit.sh
+#       ./auto_submit.sh
 #
 #   The script will loop over all directories matching DIR_PATTERN and process
 #   each one as described. After the loop, if all jobs are complete, it writes
@@ -36,13 +36,13 @@
 #------------------------------------------------------------------------------
 # Configurable variables (modify as needed)
 #------------------------------------------------------------------------------
-# Pattern matching the VASP calculation directories (supports wildcards)
+# Pattern matching the calculation directories (supports wildcards)
 DIR_PATTERN="scan_x*"
 
 # The success string to look for in OUTCAR (indicating a converged calculation)
 SUCCESS_STRING="reached required accuracy - stopping structural energy minimisation"
 
-# The command to submit a VASP job (must be executable from within the directory)
+# The command to submit a job (must be executable from within the directory)
 SUBMIT_CMD="./sub.sh"
 
 # Name of the report file generated when all directories are finished.
@@ -83,7 +83,7 @@ shopt -s nullglob
 CURRENT_DATE=$(date +%Y%m%d)
 
 # Remove any stale incomplete marker from previous runs (if exists)
-INCOMPLETE_MARKER=".vasp_auto_submit_incomplete"
+INCOMPLETE_MARKER=".auto_submit_incomplete"
 rm -f "$INCOMPLETE_MARKER"
 
 # Loop over all directories matching the pattern
