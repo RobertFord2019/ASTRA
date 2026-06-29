@@ -152,7 +152,7 @@ if [ ! -f "$INCOMPLETE_MARKER" ]; then
             [ -d "$dir" ] || continue
             # Extract the last E0 value from OSZICAR if present
             if [ -f "$dir/OSZICAR" ]; then
-                e0=$(grep "E0=" "$dir/OSZICAR" | tail -1 | awk '{print $NF}')
+                e0=$(grep "E0=" "$dir/OSZICAR" | tail -1 | awk '{for(i=1;i<=NF;i++) if($i=="E0=") print $(i+1)}')
                 if [ -z "$e0" ]; then
                     e0="NA"
                 fi
