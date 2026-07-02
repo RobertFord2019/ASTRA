@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Structure Symmetry Analysis Tool
 Supported formats: POSCAR, CONTCAR, QE input file
