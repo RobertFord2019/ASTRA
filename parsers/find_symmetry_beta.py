@@ -5,6 +5,7 @@ Structure Symmetry Analysis Tool
 Supported formats: POSCAR, CONTCAR, QE input file
 """
 
+from __future__ import print_function
 import numpy as np
 from pathlib import Path
 import sys
@@ -65,7 +66,6 @@ class StructureAnalyzer:
         """Check if the file is in POSCAR/CONTCAR format"""
         if len(lines) < 6:
             return False
-        # POSCAR format characteristics: line 1 comment, line 2 scale factor, lines 3-5 lattice vectors
         try:
             # Try to parse line 2 (scale factor)
             float(lines[1].strip().split()[0])
@@ -121,7 +121,6 @@ class StructureAnalyzer:
         is_direct = coord_type.startswith('d')
         
         # Read coordinates
-        total_atoms = sum(species_counts)
         self.coords = []
         self.species = []
         
@@ -268,7 +267,7 @@ class StructureAnalyzer:
             self.structure_type = "3D (Bulk)"
             return
             
-        # Check lattice vector lengths and angles
+        # Check lattice vector lengths
         lengths = np.linalg.norm(self.cell, axis=1)
         
         # Check which dimensions are periodic (length > tolerance)
@@ -290,30 +289,9 @@ class StructureAnalyzer:
             self.dim = 3
             self.structure_type = "3D (Bulk)"
     
-    def check_translation_symmetry(self, points):
-        # type: (np.ndarray) -> bool
-        """Check translation symmetry"""
-        if len(points) == 0:
-            return False
-            
-        # Check for identical points (considering periodic boundary conditions)
-        for i in range(len(points)):
-            for j in range(i+1, len(points)):
-                diff = points[i] - points[j]
-                # Consider periodicity
-                for k in range(self.dim):
-                    diff[k] = diff[k] - np.round(diff[k] / self.cell[k][k]) * self.cell[k][k]
-                
-                if np.linalg.norm(diff) < self.tolerance:
-                    return True
-        return False
-    
     def find_symmetry_operations(self):
         # type: () -> dict
-        """
-        Find symmetry operations (simplified version)
-        Mainly detects inversion center, mirror planes, rotations, etc.
-        """
+        """Find symmetry operations (simplified version)"""
         if self.coords is None or len(self.coords) == 0:
             return {}
             
@@ -324,7 +302,6 @@ class StructureAnalyzer:
         is_centrosymmetric = True
         for pos in self.coords:
             inv_pos = 2 * center - pos
-            # Check if corresponding inversion position exists
             found = False
             for other in self.coords:
                 if np.linalg.norm(inv_pos - other) < self.tolerance:
@@ -335,7 +312,7 @@ class StructureAnalyzer:
                 break
         operations['Inversion'] = is_centrosymmetric
         
-        # 2. Check mirror symmetry along principal axes (simplified)
+        # 2. Check mirror symmetry along principal axes
         mirror_planes = []
         axes = ['x', 'y', 'z']
         for i, axis in enumerate(axes[:self.dim]):
@@ -355,7 +332,7 @@ class StructureAnalyzer:
                 mirror_planes.append("Mirror plane (perpendicular to {}-axis)".format(axis))
         operations['Mirror planes'] = mirror_planes
         
-        # 3. Check rotational symmetry (2-fold, 3-fold, 4-fold, 6-fold)
+        # 3. Check rotational symmetry
         rotations = self._find_rotational_symmetry(center)
         if rotations:
             operations['Rotational symmetry'] = rotations
@@ -409,9 +386,7 @@ class StructureAnalyzer:
         # type: (np.ndarray, np.ndarray) -> bool
         """Check if structure has a given rotational symmetry"""
         for pos in self.coords:
-            # Rotate position around center
             rotated = np.dot(rot_matrix, pos - center) + center
-            # Check if rotated position exists
             found = False
             for other in self.coords:
                 if np.linalg.norm(rotated - other) < self.tolerance:
@@ -433,7 +408,6 @@ class StructureAnalyzer:
             'Tolerance': self.tolerance,
         }
         
-        # Find symmetry operations
         sym_ops = self.find_symmetry_operations()
         result.update(sym_ops)
         
@@ -475,7 +449,6 @@ class StructureAnalyzer:
         else:
             print("  Rotational symmetry: None detected")
         
-        # Point group summary (simplified)
         self._suggest_point_group(result)
         print("="*60)
     
@@ -518,7 +491,6 @@ class StructureAnalyzer:
 def tab_complete_filename(text, state):
     """Tab completion for filenames"""
     matches = glob.glob(text + '*') if text else glob.glob('*')
-    # Return only files (exclude directories)
     matches = [m for m in matches if Path(m).is_file()]
     if state < len(matches):
         return matches[state]
@@ -545,12 +517,19 @@ def get_tolerance():
     }
     
     while True:
-        choice = raw_input("\nEnter option (1-6): ").strip()
+        try:
+            choice = input("\nEnter option (1-6): ").strip()
+        except NameError:
+            choice = raw_input("\nEnter option (1-6): ").strip()
+        
         if choice in tolerance_map:
             return tolerance_map[choice]
         elif choice == '6':
             try:
-                val = float(raw_input("Enter custom tolerance (Å): ").strip())
+                try:
+                    val = float(input("Enter custom tolerance (Å): ").strip())
+                except NameError:
+                    val = float(raw_input("Enter custom tolerance (Å): ").strip())
                 if val > 0:
                     return val
                 else:
@@ -577,7 +556,11 @@ def main():
     
     # Get filename
     while True:
-        filename = raw_input("\nEnter structure filename: ").strip()
+        try:
+            filename = input("\nEnter structure filename: ").strip()
+        except NameError:
+            filename = raw_input("\nEnter structure filename: ").strip()
+            
         if not filename:
             print("Filename cannot be empty")
             continue
