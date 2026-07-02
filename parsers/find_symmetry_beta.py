@@ -29,7 +29,8 @@ class StructureAnalyzer:
         self.dim = None
         self.structure_type = None
         
-    def read_file(self, filename: str) -> bool:
+    def read_file(self, filename):
+        # type: (str) -> bool
         """
         Read structure file, auto-detect format
         
@@ -55,10 +56,11 @@ class StructureAnalyzer:
             return True
             
         except Exception as e:
-            print(f"Error reading file: {e}")
+            print("Error reading file: {}".format(e))
             return False
     
-    def _is_poscar(self, lines: List[str]) -> bool:
+    def _is_poscar(self, lines):
+        # type: (List[str]) -> bool
         """Check if the file is in POSCAR/CONTCAR format"""
         if len(lines) < 6:
             return False
@@ -76,14 +78,16 @@ class StructureAnalyzer:
         except:
             return False
     
-    def _is_qe(self, lines: List[str]) -> bool:
+    def _is_qe(self, lines):
+        # type: (List[str]) -> bool
         """Check if the file is in QE input format"""
         text = ''.join(lines).lower()
         qe_keywords = ['&system', '&control', 'atomic_species', 'atomic_positions', 
                       'cell_parameters', 'ibrav']
         return any(keyword in text for keyword in qe_keywords)
     
-    def _read_poscar(self, lines: List[str]):
+    def _read_poscar(self, lines):
+        # type: (List[str]) -> None
         """Read POSCAR/CONTCAR file"""
         # Skip first comment line
         idx = 1
@@ -133,7 +137,8 @@ class StructureAnalyzer:
         
         self.coords = np.array(self.coords)
     
-    def _read_qe(self, lines: List[str]):
+    def _read_qe(self, lines):
+        # type: (List[str]) -> None
         """Read QE input file"""
         self.cell = None
         self.coords = []
@@ -213,7 +218,8 @@ class StructureAnalyzer:
         
         self.coords = np.array(self.coords)
     
-    def _get_cell_from_ibrav(self, lines: List[str]) -> np.ndarray:
+    def _get_cell_from_ibrav(self, lines):
+        # type: (List[str]) -> Optional[np.ndarray]
         """Get lattice parameters from ibrav parameter"""
         ibrav = None
         celldm = [1.0] * 6  # Default values
@@ -254,6 +260,7 @@ class StructureAnalyzer:
         return None
     
     def _determine_dimension(self):
+        # type: () -> None
         """Determine the dimension of the structure"""
         if self.cell is None or len(self.cell) != 3:
             self.dim = 3
@@ -282,7 +289,8 @@ class StructureAnalyzer:
             self.dim = 3
             self.structure_type = "3D (Bulk)"
     
-    def check_translation_symmetry(self, points: np.ndarray) -> bool:
+    def check_translation_symmetry(self, points):
+        # type: (np.ndarray) -> bool
         """Check translation symmetry"""
         if len(points) == 0:
             return False
@@ -299,7 +307,8 @@ class StructureAnalyzer:
                     return True
         return False
     
-    def find_symmetry_operations(self) -> dict:
+    def find_symmetry_operations(self):
+        # type: () -> dict
         """
         Find symmetry operations (simplified version)
         Mainly detects inversion center, mirror planes, rotations, etc.
@@ -342,7 +351,7 @@ class StructureAnalyzer:
                     is_mirror = False
                     break
             if is_mirror:
-                mirror_planes.append(f"Mirror plane (perpendicular to {axis}-axis)")
+                mirror_planes.append("Mirror plane (perpendicular to {}-axis)".format(axis))
         operations['Mirror planes'] = mirror_planes
         
         # 3. Check rotational symmetry (2-fold, 3-fold, 4-fold, 6-fold)
@@ -352,7 +361,8 @@ class StructureAnalyzer:
         
         return operations
     
-    def _find_rotational_symmetry(self, center: np.ndarray) -> List[str]:
+    def _find_rotational_symmetry(self, center):
+        # type: (np.ndarray) -> List[str]
         """Find rotational symmetry axes"""
         rotations = []
         
@@ -366,7 +376,7 @@ class StructureAnalyzer:
             ])
             
             if self._check_rotation_symmetry(rot_matrix, center):
-                rotations.append(f"{n}-fold rotation (about z-axis)")
+                rotations.append("{}fold rotation (about z-axis)".format(n))
         
         # Check for rotation about x-axis
         for n in [2]:
@@ -378,7 +388,7 @@ class StructureAnalyzer:
             ])
             
             if self._check_rotation_symmetry(rot_matrix, center):
-                rotations.append(f"{n}-fold rotation (about x-axis)")
+                rotations.append("{}fold rotation (about x-axis)".format(n))
         
         # Check for rotation about y-axis
         for n in [2]:
@@ -390,11 +400,12 @@ class StructureAnalyzer:
             ])
             
             if self._check_rotation_symmetry(rot_matrix, center):
-                rotations.append(f"{n}-fold rotation (about y-axis)")
+                rotations.append("{}fold rotation (about y-axis)".format(n))
         
         return rotations
     
-    def _check_rotation_symmetry(self, rot_matrix: np.ndarray, center: np.ndarray) -> bool:
+    def _check_rotation_symmetry(self, rot_matrix, center):
+        # type: (np.ndarray, np.ndarray) -> bool
         """Check if structure has a given rotational symmetry"""
         for pos in self.coords:
             # Rotate position around center
@@ -409,7 +420,8 @@ class StructureAnalyzer:
                 return False
         return True
     
-    def analyze(self) -> dict:
+    def analyze(self):
+        # type: () -> dict
         """Comprehensive structure symmetry analysis"""
         result = {
             'Dimension': self.structure_type,
@@ -427,37 +439,38 @@ class StructureAnalyzer:
         return result
     
     def print_report(self):
+        # type: () -> None
         """Print symmetry analysis report"""
         result = self.analyze()
         
         print("\n" + "="*60)
         print("Structure Symmetry Analysis Report")
         print("="*60)
-        print(f"Structure type: {result['Dimension']}")
-        print(f"Dimension number: {result['Dimension number']}")
-        print(f"Total atoms: {result['Total atoms']}")
-        print(f"Atomic species: {', '.join(result['Atomic species'])}")
-        print(f"Tolerance: {result['Tolerance']} Å")
+        print("Structure type: {}".format(result['Dimension']))
+        print("Dimension number: {}".format(result['Dimension number']))
+        print("Total atoms: {}".format(result['Total atoms']))
+        print("Atomic species: {}".format(', '.join(result['Atomic species'])))
+        print("Tolerance: {} Å".format(result['Tolerance']))
         
         if result['Lattice parameters']:
             print("\nLattice parameters (Å):")
             for i, vec in enumerate(result['Lattice parameters']):
-                print(f"  a{i+1}: [{vec[0]:.6f}, {vec[1]:.6f}, {vec[2]:.6f}]")
+                print("  a{}: [{:.6f}, {:.6f}, {:.6f}]".format(i+1, vec[0], vec[1], vec[2]))
         
         print("\nSymmetry Analysis:")
-        print(f"  Inversion symmetry: {'Yes' if result.get('Inversion', False) else 'No'}")
+        print("  Inversion symmetry: {}".format('Yes' if result.get('Inversion', False) else 'No'))
         
         if result.get('Mirror planes'):
             print("  Mirror planes:")
             for plane in result['Mirror planes']:
-                print(f"    - {plane}")
+                print("    - {}".format(plane))
         else:
             print("  Mirror planes: None detected")
         
         if result.get('Rotational symmetry'):
             print("  Rotational symmetry:")
             for rot in result['Rotational symmetry']:
-                print(f"    - {rot}")
+                print("    - {}".format(rot))
         else:
             print("  Rotational symmetry: None detected")
         
@@ -465,7 +478,8 @@ class StructureAnalyzer:
         self._suggest_point_group(result)
         print("="*60)
     
-    def _suggest_point_group(self, result: dict):
+    def _suggest_point_group(self, result):
+        # type: (dict) -> None
         """Suggest possible point group (simplified)"""
         has_inversion = result.get('Inversion', False)
         mirror_planes = result.get('Mirror planes', [])
@@ -510,7 +524,8 @@ def tab_complete_filename(text, state):
     return None
 
 
-def get_tolerance() -> float:
+def get_tolerance():
+    # type: () -> float
     """Interactive tolerance selection"""
     print("\nSelect symmetry detection tolerance:")
     print("  1. 0.001 Å (High precision)")
@@ -529,12 +544,12 @@ def get_tolerance() -> float:
     }
     
     while True:
-        choice = input("\nEnter option (1-6): ").strip()
+        choice = raw_input("\nEnter option (1-6): ").strip()
         if choice in tolerance_map:
             return tolerance_map[choice]
         elif choice == '6':
             try:
-                val = float(input("Enter custom tolerance (Å): ").strip())
+                val = float(raw_input("Enter custom tolerance (Å): ").strip())
                 if val > 0:
                     return val
                 else:
@@ -546,6 +561,7 @@ def get_tolerance() -> float:
 
 
 def main():
+    # type: () -> None
     """Main program"""
     print("="*60)
     print("Structure Symmetry Analysis Tool")
@@ -560,13 +576,13 @@ def main():
     
     # Get filename
     while True:
-        filename = input("\nEnter structure filename: ").strip()
+        filename = raw_input("\nEnter structure filename: ").strip()
         if not filename:
             print("Filename cannot be empty")
             continue
         
         if not Path(filename).exists():
-            print(f"File '{filename}' does not exist, please try again")
+            print("File '{}' does not exist, please try again".format(filename))
             continue
         
         break
@@ -577,7 +593,7 @@ def main():
     # Analyze structure
     analyzer = StructureAnalyzer(tolerance=tolerance)
     
-    print(f"\nReading file: {filename}")
+    print("\nReading file: {}".format(filename))
     if analyzer.read_file(filename):
         analyzer.print_report()
     else:
