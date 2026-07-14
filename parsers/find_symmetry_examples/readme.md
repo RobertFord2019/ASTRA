@@ -45,3 +45,17 @@ Materials Data on VBiPbO5 by Materials Project. United States: N. p., 2020. Web.
 * Modified the first-line comment of the POSCAR file from the original composition with explicit atomic counts to the corresponding reduced chemical formula.
 * Aligned the element symbols with their corresponding atomic counts in the POSCAR element and atomic-count lines.
 * No lattice parameters, atomic species, atomic counts, atomic coordinates, or other structural data were modified.
+
+
+## 2_CuWO4.POSCAR
+
+**Source**
+
+Materials Data on CuWO4 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1744419. 
+
+**Modifications**
+
+* Renamed the original file to `2_CuWO4.POSCAR` following the repository's naming convention.
+* Modified the first-line comment of the POSCAR file from the original composition with explicit atomic counts to the corresponding reduced chemical formula.
+* Aligned the element symbols with their corresponding atomic counts in the POSCAR element and atomic-count lines.
+* No lattice parameters, atomic species, atomic counts, atomic coordinates, or other structural data were modified. 
