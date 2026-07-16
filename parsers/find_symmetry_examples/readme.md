@@ -18,6 +18,13 @@ Materials Data on CaPHO4 by Materials Project. United States: N. p., 2020. Web. 
 * Aligned the element symbols with their corresponding atomic counts in the POSCAR element and atomic-count lines.
 * No lattice parameters, atomic species, atomic counts, atomic coordinates, or other structural data were modified.
 
+**Symmetry information**
+
+* Space group number: 1
+* Crystal system: Triclinic
+* Point group: 1
+* Schoenflies notation: C_1
+* International short symbol: P1 
 
 ## 1_Li3CuSbO5.POSCAR
 
@@ -32,6 +39,13 @@ Materials Data on Li3CuSbO5 by Materials Project. United States: N. p., 2020. We
 * Aligned the element symbols with their corresponding atomic counts in the POSCAR element and atomic-count lines.
 * No lattice parameters, atomic species, atomic counts, atomic coordinates, or other structural data were modified.
 
+**Symmetry information**
+
+* Space group number: 1
+* Crystal system: Triclinic
+* Point group: 1
+* Schoenflies notation: C_1
+* International short symbol: P1 
 
 ## 1_VBiPbO5.POSCAR
 
@@ -46,6 +60,13 @@ Materials Data on VBiPbO5 by Materials Project. United States: N. p., 2020. Web.
 * Aligned the element symbols with their corresponding atomic counts in the POSCAR element and atomic-count lines.
 * No lattice parameters, atomic species, atomic counts, atomic coordinates, or other structural data were modified.
 
+**Symmetry information**
+
+* Space group number: 1
+* Crystal system: Triclinic
+* Point group: 1
+* Schoenflies notation: C_1
+* International short symbol: P1 
 
 ## 2_CuWO4.POSCAR
 
@@ -60,6 +81,14 @@ Materials Data on CuWO4 by Materials Project. United States: N. p., 2020. Web. d
 * Aligned the element symbols with their corresponding atomic counts in the POSCAR element and atomic-count lines.
 * No lattice parameters, atomic species, atomic counts, atomic coordinates, or other structural data were modified. 
 
+**Symmetry information**
+
+* Space group number: 2
+* Crystal system: Triclinic
+* Point group: -1
+* Schoenflies notation: C_i
+* International short symbol: P-1 
+
 ## 2_SiO2.POSCAR
 
 **Source**
@@ -72,3 +101,11 @@ Materials Data on SiO2 by Materials Project. United States: N. p., 2020. Web. do
 * Modified the first-line comment of the POSCAR file from the original composition with explicit atomic counts to the corresponding reduced chemical formula.
 * Aligned the element symbols with their corresponding atomic counts in the POSCAR element and atomic-count lines.
 * No lattice parameters, atomic species, atomic counts, atomic coordinates, or other structural data were modified. 
+
+**Symmetry information**
+
+* Space group number: 2
+* Crystal system: Triclinic
+* Point group: -1
+* Schoenflies notation: C_i
+* International short symbol: P-1 
