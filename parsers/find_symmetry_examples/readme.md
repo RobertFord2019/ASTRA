@@ -151,3 +151,24 @@ Materials Data on Nb2O5 by Materials Project. United States: N. p., 2020. Web. d
 * Point group: 2
 * Schoenflies notation: C_2
 * International short symbol: P2
+
+## 3_S.POSCAR
+
+**Source**
+
+Materials Data on S by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1740781.
+
+**Modifications**
+
+* Renamed the original file to `3_S.POSCAR` following the repository's naming convention.
+* Modified the first-line comment of the POSCAR file from the original composition with explicit atomic counts to the corresponding reduced chemical formula.
+* Aligned the element symbols with their corresponding atomic counts in the POSCAR element and atomic-count lines.
+* No lattice parameters, atomic species, atomic counts, atomic coordinates, or other structural data were modified.
+
+**Symmetry information**
+
+* Space group number: 3
+* Crystal system: Monoclinic
+* Point group: 2
+* Schoenflies notation: C_2
+* International short symbol: P2
