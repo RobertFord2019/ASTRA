@@ -72,7 +72,7 @@ Materials Data on VBiPbO5 by Materials Project. United States: N. p., 2020. Web.
 
 **Source**
 
-Materials Data on Ag2Mo2O7 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1677333. 
+Materials Data on Ag2Mo2O7 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1677333.
 
 **Modifications**
 
@@ -93,7 +93,7 @@ Materials Data on Ag2Mo2O7 by Materials Project. United States: N. p., 2020. Web
 
 **Source**
 
-Materials Data on CuWO4 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1744419. 
+Materials Data on CuWO4 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1744419.
 
 **Modifications**
 
@@ -114,7 +114,7 @@ Materials Data on CuWO4 by Materials Project. United States: N. p., 2020. Web. d
 
 **Source**
 
-Materials Data on SiO2 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1269366. 
+Materials Data on SiO2 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1269366.
 
 **Modifications**
 
@@ -198,7 +198,7 @@ Materials Data on S2N3O8 by Materials Project. United States: N. p., 2020. Web. 
 
 **Source**
 
-Materials Data on CsP(HO2)2 by Materials Project. United States: N. p., 2019. Web. doi:10.17188/1672411.  
+Materials Data on CsP(HO2)2 by Materials Project. United States: N. p., 2019. Web. doi:10.17188/1672411.
 
 **Modifications**
 
@@ -219,7 +219,7 @@ Materials Data on CsP(HO2)2 by Materials Project. United States: N. p., 2019. We
 
 **Source**
 
-Materials Data on LiMoP2O7 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1193767. 
+Materials Data on LiMoP2O7 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1193767.
 
 **Modifications**
 
@@ -240,7 +240,7 @@ Materials Data on LiMoP2O7 by Materials Project. United States: N. p., 2020. Web
 
 **Source**
 
-Materials Data on RbMnPO4 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1662668. 
+Materials Data on RbMnPO4 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1662668.
 
 **Modifications**
 
@@ -261,7 +261,7 @@ Materials Data on RbMnPO4 by Materials Project. United States: N. p., 2020. Web.
 
 **Source**
 
-Materials Data on Bi7O5F11 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1707392.  
+Materials Data on Bi7O5F11 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1707392.
 
 **Modifications**
 
@@ -278,12 +278,32 @@ Materials Data on Bi7O5F11 by Materials Project. United States: N. p., 2020. Web
 * Schoenflies notation: C_2
 * International short symbol: C2
 
+## 5_K2LiBO3.POSCAR
+
+**Source**
+
+Materials Data on K2LiBO3 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1269932.
+
+**Modifications**
+
+* Renamed the original file to `5_K2LiBO3.POSCAR` following the repository's naming convention.
+* Modified the first-line comment of the POSCAR file from the original composition with explicit atomic counts to the corresponding reduced chemical formula.
+* Aligned the element symbols with their corresponding atomic counts in the POSCAR element and atomic-count lines.
+* No lattice parameters, atomic species, atomic counts, atomic coordinates, or other structural data were modified.
+
+**Symmetry information**
+
+* Space group number: 5
+* Crystal system: Monoclinic
+* Point group: 2
+* Schoenflies notation: C_2
+* International short symbol: C2
 
 ## 5_KCrP2S7.POSCAR
 
 **Source**
 
-Materials Data on KCrP2S7 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1286634.   
+Materials Data on KCrP2S7 by Materials Project. United States: N. p., 2020. Web. doi:10.17188/1286634.
 
 **Modifications**
 
